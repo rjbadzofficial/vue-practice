@@ -8,14 +8,20 @@
 </head>
 <body>
     <div id="shopping-list">
-        <h1>{{header || 'Welcome'}}</h1>
         <div>
-            <input @keyup.enter="addItem" v-model="newItem" placeholder="Add Item">
-            <button @click="addItem" class="btn btn-submit">Add Item</button>
+            <h1>{{header || 'Welcome'}}</h1>
+            <button v-if="editing" @click="editItem(false)" class="btn btn-cancel">Cancel</button>
+            <button v-else @click="editItem(true)" class="btn btn-primary">Add Item</button>
         </div>
-        <ul>
-            <li v-for="item in items" :key="item.id">{{item.id}} {{item.label}}</li>
-        </ul>
+        <div v-if="editing">
+            <div>
+                <input @keyup.enter="addItem" v-model="newItem" placeholder="Add Item">
+                <button @click="addItem" class="btn btn-submit">Save Item</button>
+            </div>
+            <ul>
+                <li v-for="item in items" :key="item.id">{{item.id}} {{item.label}}</li>
+            </ul>
+        </div>
         <div>
             <h2>Radio</h2>
             <input type="radio" v-model="newItemRadio" value="low"> low
@@ -54,11 +60,16 @@
                     newItemSelect: 'low',
                     newItemCheckbox: [],
                     items: [],
+                    editing: false
                 }
             },
             methods: {
                 addItem(){
                     this.items.push({id:this.items.length+1, label: this.newItem})
+                    this.newItem = ''
+                },
+                editItem(editing){
+                    this.editing = editing
                     this.newItem = ''
                 }
             }
