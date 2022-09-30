@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Test</title>
+</head>
+<body>
+    <div id="shopping-list">
+        <h1>{{header || 'Welcome'}}</h1>
+        <div>
+            <input @keyup.enter="addItem" v-model="newItem" placeholder="Add Item">
+            <button @click="addItem" class="btn btn-submit">Add Item</button>
+        </div>
+        <ul>
+            <li v-for="item in items" :key="item.id">{{item.id}} {{item.label}}</li>
+        </ul>
+        <div>
+            <h2>Radio</h2>
+            <input type="radio" v-model="newItemRadio" value="low"> low
+            <input type="radio" v-model="newItemRadio" value="high"> high
+            <div>{{newItemRadio}}</div>
+        </div>
+        <div>
+            <h2>Select</h2>
+            <div>
+                <select v-model="newItemSelect">
+                    <option value="low">low</option>
+                    <option value="high">high</option>
+                </select>
+            </div>
+            <div>{{newItemSelect}}</div>
+        </div>
+        <div>
+            <h2>Checkbox</h2>
+            <div>
+                <input type="checkbox" v-model="newItemCheckbox" value="mango"> mango
+                <input type="checkbox" v-model="newItemCheckbox" value="banana"> banana
+                <input type="checkbox" v-model="newItemCheckbox" value="apple"> apple
+                <input type="checkbox" v-model="newItemCheckbox" value="orange"> orange
+            </div>
+            <div>{{newItemCheckbox}}</div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        Vue.createApp({
+            data(){
+                return {
+                    header: "Shopping List",
+                    newItem: '',
+                    newItemRadio: 'low',
+                    newItemSelect: 'low',
+                    newItemCheckbox: [],
+                    items: [],
+                }
+            },
+            methods: {
+                addItem(){
+                    this.items.push({id:this.items.length+1, label: this.newItem})
+                    this.newItem = ''
+                }
+            }
+        })
+        .mount('#shopping-list')
+    </script>
+</body>
+</html>
