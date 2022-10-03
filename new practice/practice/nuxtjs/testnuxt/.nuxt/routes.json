@@ -1,0 +1,16 @@
+[
+  {
+    "name": "posts-id",
+    "path": "/posts/:id?",
+    "component": "D:\\\\vuejs\\\\new practice\\\\practice\\\\nuxtjs\\\\testnuxt\\\\pages\\\\posts\\\\_id.vue",
+    "chunkName": "pages/posts/_id",
+    "_name": "_bc9c512e"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "D:\\\\vuejs\\\\new practice\\\\practice\\\\nuxtjs\\\\testnuxt\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_581aebc0"
+  }
+]
