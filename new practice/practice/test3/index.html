@@ -13,6 +13,11 @@
         .highPriority {
             color: rgb(255, 153, 0);
         }
+        .btn:disabled {
+            background-color: rgb(151, 142, 142);
+            border: rgb(151, 142, 142);
+            cursor: not-allowed;
+        }
     </style>
     <title>Vue Test</title>
 </head>
@@ -29,12 +34,12 @@
         </div>
         <div>
             <div v-if="editing">
-                <input @keyup.enter="addItem" v-model="newItem" placeholder="Add Item">
+                <input @keyup.enter="addItem" v-model="newItem" placeholder="Add Item" maxlength="200"> {{newItemLength + "/200"}}
                 <input type="checkbox" v-model="newItemPriority"> High Priority
                 <button @click="addItem" class="btn btn-primary" :disabled="newItem.length === 0">Save Item</button>
             </div>
             <ul>
-                <li v-for="item in items" :key="item.id" 
+                <li v-for="item in reversedItem" :key="item.id" 
                 @click="toggleStrikeOut(item)"
                 :class="[
                     {strikeout: item.purchased},
@@ -89,6 +94,14 @@
                     ],
                     editing: false
                 }
+            },
+            computed: {
+              newItemLength: function(){
+                return this.newItem.length
+              },
+              reversedItem: function(){
+                return this.items.slice(0).reverse()
+              }  
             },
             methods: {
                 addItem(){
